@@ -1,4 +1,4 @@
-name: Auto-Generate US Phone Numbers
+name: Bulk Auto-Generate 200K US Numbers
 
 on:
   push:
@@ -18,13 +18,13 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Execute Generator Script
+      - name: Run High-Volume Generator
         run: |
-          python app.py -c 100 -f e164 -o generated_numbers.csv
+          python app.py -c 200000 -f e164 -o 200k_numbers.csv
 
-      - name: Upload CSV as downloadable Artifact
+      - name: Upload 200K CSV as downloadable Zip Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: us-phone-numbers-csv
-          path: generated_numbers.csv
+          name: us-phone-numbers-200k-csv
+          path: 200k_numbers.csv
           retention-days: 7
