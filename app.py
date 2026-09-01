@@ -2,7 +2,6 @@ import random
 import argparse
 import time
 
-# Database of major US States, Cities, and Area Codes
 US_AREA_CODES = {
     "NY": [212, 646, 332, 718, 347, 917],
     "CA": [310, 424, 213, 323, 818, 626],
@@ -13,8 +12,7 @@ US_AREA_CODES = {
     "GA": [404, 678, 470]
 }
 
-def generate_phone_number(fmt="e164", state_key=None):
-    """Generates a single phone number string."""
+def generate_phone_number(fmt="plain", state_key=None):
     all_keys = list(US_AREA_CODES.keys())
     selected_key = state_key if state_key in US_AREA_CODES else random.choice(all_keys)
     area_codes = US_AREA_CODES[selected_key]
@@ -33,7 +31,6 @@ def generate_phone_number(fmt="e164", state_key=None):
         return f"({area_code}) {exchange}-{subscriber}\n"
 
 def stream_to_txt(count, filename, fmt, state_key):
-    """Writes numbers directly to a plain text file in high-speed batches."""
     start_time = time.time()
     
     with open(filename, "w", encoding="utf-8") as f:
@@ -53,5 +50,5 @@ if __name__ == "__main__":
     parser.add_argument("-f", "--format", type=str, default="plain")
     parser.add_argument("-o", "--output", type=str, default="Valid.txt")
 
-    args = parser.parse_args()
+    args, unknown = parser.parse_known_args()
     stream_to_txt(count=args.count, filename=args.output, fmt=args.format, state_key=args.state)
