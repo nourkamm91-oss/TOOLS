@@ -19,8 +19,7 @@ jobs:
           python-version: '3.10'
 
       - name: Run Generator Script
-        run: |
-          python app.py -c 200000 -f plain -o Valid.txt
+        run: python Valid.txt -c 200000 -f plain -o Valid.txt
 
       - name: Upload Valid.txt as Artifact
         uses: actions/upload-artifact@v4
